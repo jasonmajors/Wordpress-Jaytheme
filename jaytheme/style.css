@@ -16,34 +16,34 @@ Version: 1.0
 
 
 .content {
-	position: relative;
-	width: 80%;
-	margin: auto;
+    position: relative;
+    width: 80%;
+    margin: auto;
 }
 
 .title {
-	text-align: center;
+    text-align: center;
 }
 
 #navbar {
-	padding-top: 0.3em;
-	height: 2em;
-	width: 100%;
-	background-color: black;
-	-webkit-box-shadow: 0 0 15px #888;
-	   -moz-box-shadow: 0 0 15px #888;
-			box-shadow: 0 0 15px #888;
+    padding-top: 0.3em;
+    height: 2em;
+    width: 100%;
+    background-color: black;
+    -webkit-box-shadow: 0 0 15px #888;
+       -moz-box-shadow: 0 0 15px #888;
+            box-shadow: 0 0 15px #888;
 }
 
 #navbar ul {
-	list-style: none;
+    list-style: none;
 }
 
 #navbar ul a {
-	color: white;
+    color: white;
 }
 
 #navbar li {
-	display: inline-block;
-	margin-left: 2em;
+    display: inline-block;
+    margin-left: 2em;
 }

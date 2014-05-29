@@ -10,20 +10,20 @@
         <?php wp_head(); ?>
     </head>
     <body <?php body_class(); ?>>
-    	<div id='navbar'>
-    		<ul>
-    		<?php
-    		// Build inline list of pages on the navbar.
-				$home = "<li><a href='/wp'>J</a></li>";
-				$pages = get_pages();
-				echo $home;
-				foreach ($pages as $page) {
-					$link = '<li><a href="' . get_page_link($page->ID) . '">';
-					$link .= $page->post_title;
-					$link .= '</a></li>';
-					echo $link;
-				}
-			?>	
-			</ul>
-			
-		</div>	
+        <div id='navbar'>
+            <ul>
+            <?php
+            // Build inline list of pages on the navbar.
+                $home = "<li><a href='/wp'>J</a></li>";
+                $pages = get_pages();
+                echo $home;
+                foreach ($pages as $page) {
+                    $link = '<li><a href="' . get_page_link($page->ID) . '">';
+                    $link .= $page->post_title;
+                    $link .= '</a></li>';
+                    echo $link;
+                }
+            ?>  
+            </ul>
+            
+        </div>  

@@ -36,6 +36,8 @@
                     if (isset($access) && $access == 'private') {
                         if ( $logged_in ) {
                             echo $link;
+                            continue;
+                            
                         } else {
                             continue;
                         }

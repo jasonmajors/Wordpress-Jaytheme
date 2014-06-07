@@ -46,4 +46,5 @@ Version: 1.0
 #navbar li {
     display: inline-block;
     margin-left: 2em;
+    color: white;
 }

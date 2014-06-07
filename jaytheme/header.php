@@ -14,14 +14,41 @@
             <ul>
             <?php
             // Build inline list of pages on the navbar.
+                if ( is_user_logged_in() ) {
+                    $current_user = wp_get_current_user();
+                    $name = $current_user->user_firstname;
+                    $msg = "<li>Welcome, $name! </li>";
+                    echo $msg;
+                    $logged_in = true;
+                }
+                
                 $home = "<li><a href='/wp'>J</a></li>";
-                $pages = get_pages();
                 echo $home;
+                $pages = get_pages();
+                $logout = wp_logout_url();
+                
+                
                 foreach ($pages as $page) {
                     $link = '<li><a href="' . get_page_link($page->ID) . '">';
                     $link .= $page->post_title;
                     $link .= '</a></li>';
-                    echo $link;
+                    $access = get_field( "access", $page->ID );
+                    if (isset($access) && $access == 'private') {
+                        if ( $logged_in ) {
+                            echo $link;
+                        } else {
+                            continue;
+                        }
+                    }
+
+                    echo $link; 
+                }
+
+                if ( $logged_in ) {
+                    echo "<li><a href='$logout'>Log Out</a></li>";
+                }
+                else {
+                    echo "<li><a href='/wp/login'>Log in</a></li>";
                 }
             ?>  
             </ul>

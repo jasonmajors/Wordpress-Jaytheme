@@ -51,7 +51,7 @@
 				$winner = $match->battle();
 				array_push($this->winners, $winner);
 				$msg = $match->teamA->name . ' vs. ' . $match->teamB->name;
-				$winner_msg = "$winner->name wins!";
+				$winner_msg = "<em>$winner->name wins!</em>";
 				echo $msg;
 				echo "<br>";
 				echo $winner_msg;
@@ -87,19 +87,18 @@
 		public function tournament()
 		{
 			if (count($this->teams_remaining) % 4 != 0) {
-				$err_msg = "Invalid Bracket";
-				echo $err_msg;
+				exit("Invalid bracket -- must be a power of 4!");
 			}
 
 			$round_num = 1;
 
 			while (count($this->teams_remaining) > 1) {
-				echo "Round Number $round_num </br>";
+				echo "<strong>Round Number $round_num</strong></br></br>";
 				$round_winners = $this->solve_round();
 				
 				if (count($round_winners) == 1) {
 					$winner = $round_winners[0];
-					echo "WINNER - $winner->name";
+					echo "<h3>WINNER - $winner->name</h3>";
 					break;
 				}
 
@@ -109,15 +108,18 @@
 		}
 	}
 
-$team1 = new Team(3, 'team#1');
-$team2 = new Team(4, 'team#2');
-$team3 = new Team(5, 'team#3');
-$team4 = new Team(6, 'team#4');
+	$tournament = new Tournament();
+	$heroes = array( 'post_type' => 'my_heroes' );
+	$loop = new WP_Query( $heroes );
+	while ( $loop->have_posts() ) {
+		$loop->the_post();
+		$power = get_field( 'stats' );
+		$name = the_title('', '', false);
+		$hero = new Team($power, $name);
+		array_push($tournament->teams_remaining, $hero);
+	}
+	$tournament->tournament();
 
-$tournament = new Tournament();
-
-array_push($tournament->teams_remaining, $team1, $team2, $team3, $team4);
-$tournament->tournament();
 
 ?>
 

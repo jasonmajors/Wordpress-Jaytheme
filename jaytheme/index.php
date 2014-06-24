@@ -5,7 +5,7 @@
         <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
             <div class="post">
                 <h2 id="post-center"><?php the_title(); ?></h2>
-                <p id="post-center"><?php the_time('F jS, Y'); ?> by <?php the_author_posts_link(); ?></p>
+                <p id="post-center"><?php the_time('F jS, Y'); ?></p>
                 <p><?php the_content(); ?></p>
             </div>  
         <?php endwhile; else: ?>

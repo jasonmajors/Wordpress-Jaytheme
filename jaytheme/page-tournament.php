@@ -12,8 +12,9 @@
         include $class;
     }
 
-    //function set_tourny()
+    // Wrap the if/then in main() function.
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        //function set_tourny()
         $tournament = new Tournament();
         $heroes = array( 'post_type' => 'my_heroes' );
         $loop = new WP_Query( $heroes );
@@ -27,7 +28,7 @@
             array_push($tournament->heroes_remaining, $hero);
         }
         $tournament->tournament();
-    //end function    
+        //end function    
 
         // Just testing out some logic -- need to clean this all up.
 

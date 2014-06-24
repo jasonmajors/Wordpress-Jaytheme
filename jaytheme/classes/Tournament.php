@@ -2,18 +2,32 @@
 
 class Tournament
     {
+        private $heroes_entered;
+        private $winner;
+        private $round_matches;
+        private $round_num;
+
         public function __construct()
         {
-            $this->heroes_entered = none;
+            $this->heroes_entered = array();
             $this->winner = none;
             $this->heroes_remaining = array();
             $this->round_matches = array();
             $this->round_num = 1;
         }
 
+        public function add_hero($hero)
+        {
+            array_push($this->heroes_entered, $hero);
+        }
+
+        public function get_round()
+        {
+            return $this->round_num;
+        }
         // Place the heroes remaining (heroes_remaining array) in the tournament into matches and those matches into a round.
         // Get the winners of the round and set that to the heroes remaining.
-        public function solve_round()
+        private function solve_round()
         {
             $matches = array();
             for ($i = 0; $i < count($this->heroes_remaining); $i = $i + 2) {
@@ -40,11 +54,11 @@ class Tournament
         public function tournament()
         {
             // Bracket needs to be 4**x.
-            if (count($this->heroes_remaining) % 4 != 0) {
+            if (count($this->heroes_entered) % 4 != 0) {
                 exit("Invalid bracket -- must be a power of 4!");
             }
             else {
-                $this->heroes_entered = $this->heroes_remaining;
+                $this->heroes_remaining = $this->heroes_entered;
             }
             
 

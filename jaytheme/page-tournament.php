@@ -25,7 +25,7 @@
             $power = get_field( 'stats' );
             $name = the_title('', '', false);
             $hero = new Hero($power, $name);
-            array_push($tournament->heroes_remaining, $hero);
+            $tournament->add_hero($hero);
         }
         $tournament->tournament();
         //end function    
@@ -33,11 +33,14 @@
         // Just testing out some logic -- need to clean this all up.
 
         echo "CONTENDERS: <br>";
-        print_r($tournament->list_heroes('name'));
-        echo "<br>";
+        $contenders = $tournament->list_heroes('name');
+        foreach ( $contenders as $contender ) {
+            echo $contender . "!". " ";
+        }
+        echo "<br><br>";
 
-        foreach ( range(1, $tournament->round_num) as $i ) {
-            echo "Round #$i - FIGHT <br>";
+        foreach ( range(1, $tournament->get_round()) as $i ) {
+            echo "<strong>Round #$i - FIGHT</strong><br>";
             // Returns an array of matches from round i$ containing an array of 2 Heroes.
             $matches = $tournament->get_matches($i);
 
@@ -48,11 +51,10 @@
                 echo "$heroA vs. $heroB! <br>";
                 echo "$winner wins! <br><br>";
             }
-            echo "<br>";
         }
         // Returns an array with round numbers as keys to arrays of match objects with
         // teamA/B and winner objects as attributes.
-        print_r($tournament->round_matches);
+        
         
 
     }

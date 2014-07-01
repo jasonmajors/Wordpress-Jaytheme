@@ -3,7 +3,7 @@
 <!-- Loads header.php -->
 <?php get_header(); ?>
 <div class="content">
-    <h1>THE TOURNAMENT</h1>
+    <h1 class="title"><?php the_title(); ?></h1>
 
 <?php
     function __autoload($classname)
@@ -72,3 +72,4 @@
         </form>
     </div>      
 </div>
+<?php wp_footer(); ?>

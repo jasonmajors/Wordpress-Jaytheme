@@ -4,6 +4,7 @@ class Tournament
     {
         private $heroes_entered;
         private $winner;
+        private $heroes_remaining;
         private $round_matches;
         private $round_num;
 

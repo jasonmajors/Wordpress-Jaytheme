@@ -1,5 +1,5 @@
+<?php get_header(); ?>
 <div id='duck'>
-<?php get_header() ?>
     <div class='content'>
         <h1 class='title'><?php bloginfo('name'); ?> | <?php is_home() ? bloginfo('description') : wp_title(''); ?></h1>
         <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
@@ -8,10 +8,11 @@
                 <p id="post-center"><?php the_time('F jS, Y'); ?></p>
                 <p><?php the_content(); ?></p>
             </div>  
-        <?php endwhile; else: ?>
+        <?php endwhile; ?>
+        <?php wp_reset_postdata(); ?>
+        <?php else: ?>
             <p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
         <?php endif; ?>
-    </div> 
-</div>         
-</body>
-</html> 
+    </div>   
+</div>       
+<?php wp_footer(); ?>

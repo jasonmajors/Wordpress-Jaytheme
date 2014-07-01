@@ -9,3 +9,4 @@
 
         <?php endif; ?>
     </div>  
+<?php wp_footer(); ?>    

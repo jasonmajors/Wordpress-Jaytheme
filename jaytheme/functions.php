@@ -11,10 +11,10 @@
                                 'labels' => array(
                                         'name' => __( 'Heroes'),
                                         'singular_name' => __( ' Hero ')
-                                    ),
-                            'public' => true,
-                            'has_archive' => true,
-                            'rewrite' => array( 'slug' => 'hero'),
+                                        ),
+                                'public' => true,
+                                'has_archive' => true,
+                                'rewrite' => array( 'slug' => 'hero'),
 
                             )
                         );

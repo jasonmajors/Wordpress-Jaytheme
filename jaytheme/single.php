@@ -1,4 +1,6 @@
 <?php get_header(); ?>
+<!-- Need to close the body tag and reopen with duck ID to apply the bg -->
+<!-- Sketchy? I don't know... -->
 </body>
 <body id="duck">
     <div class='content'>
@@ -8,19 +10,14 @@
                 <h2 id="post-center"><?php the_title(); ?></h2>
                 <p id="post-center"><?php the_time('F jS, Y'); ?></p>
                 <!-- Can get rid of this if can't make it work -->
-                <?php $intro = get_field( "post_intro" ); ?>
-                <?php if ( $intro ): ?>
-                    <p><?php echo $intro; ?></p>
-                    <p><a href="<?php the_permalink(); ?>">View Full Post</a></p>
-                <?php else: ?>
                 <!-- End the purge -->
-                    <p><?php the_content(); ?>
-                <?php endif; ?>        
+                <p><?php the_content(); ?>        
             </div>  
         <?php endwhile; ?>
         <?php wp_reset_postdata(); ?>
         <?php else: ?>
             <p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
         <?php endif; ?>
-    </div>         
+    </div>   
+</div>       
 <?php wp_footer(); ?>

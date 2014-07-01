@@ -19,28 +19,32 @@ p {
 }
 .content {
     position: relative;
-    width: 80%;
+    width: 90%;
     margin: auto;
 }
 
 .title {
     text-align: center;
     padding-top: 0.5em;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     font-size: 300%;
 }
 
 .post {
     position: relative;
-    width: 70%;
+    width: 80%;
     background-color: rgba(255,255,255,0.70);
     border-radius: 20px;
     margin: auto;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     padding-left: 1.5em;
     padding-top: 0.25em;
     padding-right: 1.5em;
     padding-bottom: 0.5em;
+}
+
+.post p a {
+	color: blue;
 }
 
 #post-center {
@@ -49,8 +53,10 @@ p {
 
 #navbar {
 	position: fixed;
+	/* This seems sketchy but it's working for now */
 	margin-top: -1.5em;
 	z-index: 99999;
+	/* End sketchy */
 	padding-top: 0.3em;
     height: 2em;
     width: 100%;

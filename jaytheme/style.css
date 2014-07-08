@@ -25,14 +25,14 @@ p {
 
 .title {
     text-align: center;
-    padding-top: 0.5em;
-    margin-bottom: 2em;
+    padding-top: 0.6em;
+    margin-bottom: 1.5em;
     font-size: 300%;
 }
 
 .post {
     position: relative;
-    width: 80%;
+    width: 65%;
     background-color: rgba(255,255,255,0.70);
     border-radius: 20px;
     margin: auto;
@@ -81,9 +81,18 @@ p {
 }
 
 #duck {
-    background-image: url("http://localhost/wp/wp-content/uploads/2014/06/duck1.png");
+    background-image: url("http://localhost/wp/wp-content/uploads/2014/07/ducky.jpg");
     background-size:   cover;                    
     background-repeat: no-repeat;
     background-attachment: fixed;
 
+}
+
+#main {
+	color: white;
+}
+
+#rounds li {
+    display: inline-block;
+    margin-left: 2em;
 }

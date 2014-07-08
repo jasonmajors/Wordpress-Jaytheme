@@ -45,17 +45,16 @@ class Tournament
             // the value is an array of the winners (Hero class).
             $this->round_winners[$this->round_num] = $winners;
 
-            //TODO - loop through round_matches like round_winners
             $this->round_matches[$this->round_num] = $matches;
 
             return $winners;
         }
 
         // Keep solving rounds until there is a winner.
-        public function tournament()
+        public function run_tournament()
         {
             // Bracket needs to be 4**x.
-            if (count($this->heroes_entered) % 4 != 0) {
+            if (count($this->heroes_entered) % 2 != 0) {
                 exit("Invalid bracket -- must be a power of 4!");
             }
             else {

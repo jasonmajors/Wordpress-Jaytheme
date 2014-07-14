@@ -3,7 +3,7 @@
         show_admin_bar( false );
     }
 
-    add_action( 'init', 'create_post_type' );
+    
     function create_post_type() 
     {
         register_post_type( 'my_heroes', 
@@ -19,7 +19,17 @@
                             )
                         );
     }
+    add_action( 'init', 'create_post_type' );
 
+    function my_scripts_method()
+    {
+        wp_enqueue_script(
+                    'mouseover-description',
+                    get_stylesheet_directory_uri() . '/js/test.js',
+                    array( 'jquery' )
+                );
+    }
+    add_action( 'wp_enqueue_scripts', 'my_scripts_method')
 
 
 ?>

@@ -7,14 +7,14 @@
             <div class="post">
                 <h2 id="post-center"><?php the_title(); ?></h2>
                 <p id="post-center"><?php the_time('F jS, Y'); ?></p>
-                <!-- Can get rid of this if can't make it work -->
+                <!-- Realize now this intro text can be done in the WP admin edit post screen -->
                 <?php $intro = get_field( "post_intro" ); ?>
                 <?php if ( $intro ): ?>
                     <p><?php echo $intro; ?></p>
                     <p><a href="<?php the_permalink(); ?>">View Full Post</a></p>
                 <?php else: ?>
-                <!-- End the purge -->
-                    <p><?php the_content(); ?>
+                <!-- End Intro -->
+                    <p><?php the_content(); ?></p>
                 <?php endif; ?>        
             </div>  
         <?php endwhile; ?>

@@ -41,10 +41,6 @@ class Tournament
             $round = new Round($matches);
             $winners = $round->play_round();
             $this->heroes_remaining = $winners;
-            // Update the round_winners associate array with the round number as the key
-            // the value is an array of the winners (Hero class).
-            $this->round_winners[$this->round_num] = $winners;
-
             $this->round_matches[$this->round_num] = $matches;
 
             return $winners;

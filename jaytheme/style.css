@@ -31,7 +31,7 @@ p {
 }
 
 .post {
-    position: relative;
+
     width: 65%;
     background-color: rgba(255,255,255,0.70);
     border-radius: 20px;
@@ -82,7 +82,7 @@ p {
 
 #duck {
     background-image: url("http://localhost/wp/wp-content/uploads/2014/07/ducky.jpg");
-    background-size:   cover;                    
+    background-size: cover;                    
     background-repeat: no-repeat;
     background-attachment: fixed;
 
@@ -92,7 +92,34 @@ p {
 	color: white;
 }
 
-#rounds li {
-    display: inline-block;
-    margin-left: 2em;
+#contender-wrapper {
+	float: left;
+	width: 25em;
+}
+
+.contender {
+	margin-top: 1em;
+	margin-right: 1em;
+	margin-bottom: 1em;
+	margin-left: 1em;
+	padding-top: 1em;
+	padding-right: 1em;
+	padding-bottom: 1em;
+	padding-left: 1em;
+	border-radius: 15px;
+    -webkit-box-shadow: 0 0 15px #888;
+       -moz-box-shadow: 0 0 15px #888;
+            box-shadow: 0 0 15px #888;
+}
+
+.hero-description-fixed {
+	position: fixed;
+	display: none;
+	width: 40%;
+	left: 30%;
+	margin: auto;	
+	border-radius: 15px;
+    -webkit-box-shadow: 0 0 15px #888;
+       -moz-box-shadow: 0 0 15px #888;
+            box-shadow: 0 0 15px #888;
 }

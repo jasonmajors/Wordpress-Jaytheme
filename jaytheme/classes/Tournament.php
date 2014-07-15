@@ -21,10 +21,10 @@ class Tournament
             $this->round_num = 1;
         }
 
-        // Use this method to add Hero objects into the Tournament object.
+        // Use this method to add a Hero object into the Tournament object.
         public function add_hero($hero)
         {
-            array_push($this->heroes_entered, $hero);
+            $this->heroes_entered[] = $hero;
         }
         // Simple method to return how many rounds were processed in the tournament.
         // Need this in order to keep $round_num private but still have access to how many rounds passed.
@@ -45,7 +45,7 @@ class Tournament
 
         // This method will place Hero objects into Matches, Matches into a Round, and return the winners of the round.
         // Set to private as it should never need to be used outside of the Tournament class.
-        private function solve_round()
+        private function simulate_round()
         {
             // Empty array where we'll store the Match objects for each round.
             $matches = array();
@@ -60,18 +60,18 @@ class Tournament
             }
             // Store the matches array for each round in an associative array with the round number as the key.
             // This will allow us to retrieve an array of Match objects based on a round number later.
-            // Note that each Match object stores both Hero objects as wall as the match winner.
+            // Note that each Match object stores both Hero instances as wall as the match winner.
             $this->round_matches[$this->round_num] = $matches;
 
-            // Create a new Round with the array of Match objects.
+            // Create a new Round with the array of Match instances.
             $round = new Round($matches);
-            // play_round() returns an array of Hero objects that won their match.
+            // play_round() returns an array of Hero instances that won their match.
             $winners = $round->play_round();
             // Return the array of winners.
             return $winners;
         }
 
-        // This function will keep creating and playing/solving rounds until there is only 1 Hero object in the winners array from solve_round().
+        // This function will keep creating and playing/solving rounds until there is only 1 Hero object in the winners array from simulate_round().
         public function run_tournament()
         {
             // Bracket needs to be a power of 4. Will probably validate the bracket earlier somewhere.
@@ -83,8 +83,8 @@ class Tournament
             }
             // While there's more than 1 Hero object in our heroes_remaining array, keep creating Rounds and returning the winners.
             while (count($this->heroes_remaining) > 1) {
-                // solve_round() returns an array of that round's winners.
-                $round_winners = $this->solve_round();
+                // simulate_round() returns an array of that round's winners.
+                $round_winners = $this->simulate_round();
                 // Set the heroes_remaining array to the Heroes that won the round.
                 $this->heroes_remaining = $round_winners;
                 // When solve->round() is called with only 2 Hero objects remaining, the $winners array will contain
@@ -96,10 +96,13 @@ class Tournament
                 $this->round_num += 1;
             }
         }
-
+        // Function to retrieve the matches for a particular round.
+        // This will be used to get the information we need for the HTML.
         public function get_matches($round_num)
         {
-            $matches = $this->round_matches[$round_num];    
+            $matches = $this->round_matches[$round_num];  
+            // $matches will be an array of the Match objects for round $round_num.
+            // Each Match object will have a heroA, heroB, and winner attribute that we can use.  
             return $matches;
         }
 

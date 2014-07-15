@@ -2,9 +2,9 @@
 <!-- Need to close the body tag and reopen with duck ID to apply the bg -->
 <!-- Sketchy? I don't know... -->
 </body>
-<body id="duck">
+<body id="index-bg">
     <div class='content'>
-        <h1 class='title'><?php bloginfo('name'); ?> | <?php is_home() ? bloginfo('description') : wp_title(''); ?></h1>
+        <h1 class='title' id='main'><?php bloginfo('name'); ?> | <?php is_home() ? bloginfo('description') : wp_title(''); ?></h1>
         <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
             <div class="post">
                 <h2 id="post-center"><?php the_title(); ?></h2>

@@ -6,7 +6,7 @@
             <?php 
             // Get the field values from advanced custom fields.
                 $desc = get_field( "description" );
-                $power = get_field( "power" ); 
+                $power = get_field( "tagline" ); 
             ?>
             <h3>Description: <?php echo $desc; ?></h3>
             <h3>Superpower: <?php echo $power; ?></h3>

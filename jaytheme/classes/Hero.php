@@ -3,10 +3,10 @@
 // Could expand to hold multiple attributes.
 class Hero
 {
-    public function __construct($attr, $name)
+    public function __construct($name, $attr)
     {
+    	$this->name = $name;
         $this->attr = $attr;
-        $this->name = $name;
     }
 }
 ?>

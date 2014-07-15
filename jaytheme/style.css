@@ -31,7 +31,6 @@ p {
 }
 
 .post {
-
     width: 65%;
     background-color: rgba(255,255,255,0.70);
     border-radius: 20px;
@@ -80,12 +79,11 @@ p {
     color: white;
 }
 
-#duck {
+#index-bg {
     background-image: url("http://localhost/wp/wp-content/uploads/2014/07/ducky.jpg");
     background-size: cover;                    
     background-repeat: no-repeat;
     background-attachment: fixed;
-
 }
 
 #main {
@@ -94,14 +92,29 @@ p {
 
 #contender-wrapper {
 	float: left;
-	width: 25em;
+	width: 25%;
 }
 
 .contender {
-	margin-top: 1em;
+	margin-top: 0em;
 	margin-right: 1em;
-	margin-bottom: 1em;
-	margin-left: 1em;
+	margin-bottom: 0.5em;
+	padding-top: 1em;
+	padding-right: 1em;
+	padding-bottom: 1em;
+	padding-left: 1em;
+	border-radius: 15px;
+    -webkit-box-shadow: 0 0 10px #888;
+       -moz-box-shadow: 0 0 10px #888;
+            box-shadow: 0 0 10px #888;
+}
+
+.hero-description-fixed {
+	position: fixed;
+	display: none;
+	width: 65%;
+	left: 30%;
+	margin: auto;	
 	padding-top: 1em;
 	padding-right: 1em;
 	padding-bottom: 1em;
@@ -112,14 +125,29 @@ p {
             box-shadow: 0 0 15px #888;
 }
 
-.hero-description-fixed {
-	position: fixed;
-	display: none;
-	width: 40%;
-	left: 30%;
-	margin: auto;	
-	border-radius: 15px;
-    -webkit-box-shadow: 0 0 15px #888;
-       -moz-box-shadow: 0 0 15px #888;
-            box-shadow: 0 0 15px #888;
+.default-text {
+	display: block;
+	height: 30em;
+}
+
+#hero-img {
+	position: relative;
+	float: right;
+}
+
+.hero-description-text {
+	float: left;
+}
+
+#hero-fight-button {
+	margin-top: 2em;
+	margin-bottom: 4em;
+	float: left;
+	clear: both;
+}
+
+.deep-shadow {
+    -webkit-box-shadow: 0 0 20px #000;
+       -moz-box-shadow: 0 0 20px #000;
+            box-shadow: 0 0 20px #000;	
 }

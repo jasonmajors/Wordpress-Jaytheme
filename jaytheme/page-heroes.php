@@ -7,7 +7,7 @@
             $mypost = array( 'post_type' => 'my_heroes' );
             $loop = new WP_Query( $mypost );
             while ( $loop->have_posts() ) : $loop->the_post();
-                $tagline = get_field( "description" ); ?>
+                $tagline = get_field( "tagline" ); ?>
 
                 <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                 <h4><?php echo $tagline; ?></h4>

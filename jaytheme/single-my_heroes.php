@@ -14,12 +14,13 @@
                 $image = get_field( "image" );
                 if (!empty( $image ) ): ?>
                     <img src="<?php echo $image['url']; ?>" />
-
-                <?php endif; ?> 
+                <?php endif; ?>  
             <?php endwhile; ?>
-            <?php endif; ?>
+            <?php wp_reset_postdata(); ?>
+        <?php endif; ?>
     </div>  
-            <?php else: ?>
-                <?php echo "<h2>Login Required</h2>"; ?>
-            <?php endif; ?>
+<?php else: ?>
+    <?php echo "<h2>Login Required</h2>"; ?>
+<?php endif; ?>
+
 <?php wp_footer(); ?>

@@ -144,10 +144,10 @@
 
 
     if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['heroes']) ) {
-        //displayContenders();
+        displayContenders();
     }
     // Keeping for reference for now.
-    if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['heroes'])) {
+    if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['test'])) {
         $tournament = set_tournament();
         $tournament->run_tournament();
         $tournament_winner = $tournament->get_tournament_winner()->name;
@@ -181,8 +181,8 @@
     <!-- Submit button once the contenders/heroes are set -->
     <?php if ( isset($_POST['heroes']) ): ?>
     <div id="hero-fight-button">
-        <!-- TODO: Make a $PATH variable for "http://localhost/wp/". Hardcoding these paths is going to fuck me later -->
-        <form method="POST" action="http://localhost/wp/tournament/">
+        <!-- $PATh var won't work here like in line 195 because PHP is weird I dont know -->
+        <form method="POST" action="/wp/tournament/">
             <input type="submit" name="run-tournament" value="FIGHT!">
         </form>
     </div>
@@ -192,7 +192,7 @@
     <!-- Hero selection table -->
     <?php if ( !isset($_POST['heroes']) ): ?>
     <div class='post'>
-        <form method="POST" action="http://localhost/wp/tournament/">
+        <form method="POST" action=<?php $PATH . "/tournament/"; ?>>
             <table class='table'>
                 <?php echo build_table(array("Hero Name", "Select")); ?>
             </table>

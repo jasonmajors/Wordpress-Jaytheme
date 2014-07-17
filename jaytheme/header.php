@@ -13,6 +13,7 @@
         <div id='navbar'>
             <ul>
             <?php
+            include 'settings.php';
             // Build inline list of pages on the navbar.
                 if ( is_user_logged_in() ) {
                     $current_user = wp_get_current_user();
@@ -26,7 +27,7 @@
                 echo $home;
                 $pages = get_pages();
                 $logout = wp_logout_url();
-                
+                $login = $PATH . "/login/";
                 
                 foreach ($pages as $page) {
                     $link = '<li><a href="' . get_page_link($page->ID) . '">';
@@ -50,7 +51,7 @@
                     echo "<li><a href='$logout'>Log Out</a></li>";
                 }
                 else {
-                    echo "<li><a href='/wp/login'>Log in</a></li>";
+                    echo "<li><a href='$login'>Log in</a></li>";
                 }
             ?>  
             </ul>

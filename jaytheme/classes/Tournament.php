@@ -105,6 +105,5 @@ class Tournament
             // Each Match object will have a heroA, heroB, and winner attribute that we can use.  
             return $matches;
         }
-
     }
 ?>

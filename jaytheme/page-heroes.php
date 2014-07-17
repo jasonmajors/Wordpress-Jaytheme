@@ -12,7 +12,7 @@
                 <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                 <h4><?php echo $tagline; ?></h4>
 
-            <?php endwhile; ?>
+            <?php endwhile; ?>  
     </div>            
     <?php wp_reset_query(); ?>
 <?php else: ?>

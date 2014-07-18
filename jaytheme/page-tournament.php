@@ -35,8 +35,10 @@
         while ( $loop->have_posts() ) {
             $loop->the_post();
             $name = the_title('', '', false);
+            $tagline = get_field ( 'tagline' );
             $table .= "<tr>".PHP_EOL;
             $table .= "<td>$name</td>".PHP_EOL;
+            $table .= "<td>$tagline</td>".PHP_EOL;
             $table .= "<td><input type='checkbox' name='selected[]' value='$name' /></td>".PHP_EOL;
             $table .= "</tr>".PHP_EOL;
         }
@@ -194,7 +196,7 @@
     <div class='post'>
         <form method="POST" action=<?php $PATH . "/tournament/"; ?>>
             <table class='table'>
-                <?php echo build_table(array("Hero Name", "Select")); ?>
+                <?php echo build_table(array("Hero Name", "About", "Select")); ?>
             </table>
             <input type="submit" name="heroes" value="Lets Go!!">
         </form>

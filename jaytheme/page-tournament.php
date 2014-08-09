@@ -46,9 +46,9 @@
         return $table;
     }
     // TODO: Redo this function to take $contenderData as an arg.
-    function set_tournament() 
+    // NO LONGER NEED THE WHILE LOOP. CONTENDERS IS AN ARRAY OF OUR HERO DATA. FIGURE IT OUT JASON.
+    function set_tournament($contenders) 
     {
-        $selected = $_POST['selected'];
         $tournament = new Tournament();
         $heroes = array( 'post_type' => 'my_heroes' );
         $loop = new WP_Query( $heroes );
@@ -58,7 +58,7 @@
             $loop->the_post();
             $power = get_field( 'stats' );
             $name = the_title('', '', false);
-            foreach ( $selected as $entry ) {
+            foreach ( $contenders as $entry ) {
                 if ( $name == $entry ) {
                     $hero = new Hero($name, $power);
                     $tournament->add_hero($hero);
@@ -67,6 +67,7 @@
         } 
         return $tournament;
     }    
+    // End
     
     function loadContenders() 
     {
@@ -76,6 +77,7 @@
         $loop = new WP_Query( $heroes );
         while ( $loop->have_posts() ) {
             $loop->the_post();
+            // $name will be the post title which is the same as the Hero's name.
             $name = the_title('', '', false);
             // If one of the Hero posts is one of the selected contenders, add the data
             // to the contenderData array.
@@ -95,6 +97,7 @@
                 $contenderData[$name] = $contender;
             }
         }
+        // Associative array of associative arrays..  ex: $contenderData[$name][$description]
         return $contenderData;
     }
 
@@ -137,20 +140,23 @@
             echo "</div>".PHP_EOL;
             // Separate div for the img.
             echo "<div id='hero-img'><img src='$image'></div>".PHP_EOL;
+            // End img div
             // End wrapper.
             echo "</div>".PHP_EOL;      
         }
         echo "<div class='hero-description-fixed default-text'>PLACEHOLDER</div>".PHP_EOL;
+        return $contenders;
     }
-
 
 
     if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['heroes']) ) {
-        displayContenders();
+        // Need to pass the $contenders var to the tournament somehow.
+        $contenders = displayContenders();
     }
     // Keeping for reference for now.
-    if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['test'])) {
-        $tournament = set_tournament();
+    if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['test']) ) {
+        $contenders = $_POST['contenders'];
+        $tournament = set_tournament($contenders);
         $tournament->run_tournament();
         $tournament_winner = $tournament->get_tournament_winner()->name;
         
@@ -183,9 +189,9 @@
     <!-- Submit button once the contenders/heroes are set -->
     <?php if ( isset($_POST['heroes']) ): ?>
     <div id="hero-fight-button">
-        <!-- $PATh var won't work here like in line 195 because PHP is weird I dont know -->
-        <form method="POST" action="/wp/tournament/">
-            <input type="submit" name="run-tournament" value="FIGHT!">
+        <form method="POST" action="/wp/tournament/"><!-- $PATh var won't work here because PHP is weird I dont know -->
+            <input type="submit" name="test" value="FIGHT!">
+            <input type="hidden" name="contenders" value=<?php echo $contenders; ?>>
         </form>
     </div>
     <?php endif; ?>   

@@ -193,7 +193,7 @@
     <!-- End submit button -->     
 
     <!-- Hero selection table -->
-    <?php if ( !isset($_POST['heroes']) ): ?>
+    <?php if ( !isset($_POST['heroes']) && !isset($_POST['tournament_start'])): ?>
     <div class='post'>
         <form method="POST" action=<?php $PATH . "/tournament/"; ?>>
             <table class='table'>

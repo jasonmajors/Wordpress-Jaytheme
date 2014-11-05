@@ -14,11 +14,14 @@
 <?php endif; ?>        
 
 <?php
+    session_start();
+
     function __autoload($classname)
     {
         $class = "classes/$classname.php";
         include $class;
     }
+
     function build_table($headings)
     {
         $heroes = array( 'post_type' => 'my_heroes' );
@@ -45,34 +48,28 @@
         $table .= "</tbody>".PHP_EOL;
         return $table;
     }
-    // TODO: Redo this function to take $contenderData as an arg.
-    // NO LONGER NEED THE WHILE LOOP. CONTENDERS IS AN ARRAY OF OUR HERO DATA. FIGURE IT OUT JASON.
+
     function set_tournament($contenders) 
     {
         $tournament = new Tournament();
-        $heroes = array( 'post_type' => 'my_heroes' );
-        $loop = new WP_Query( $heroes );
-        // Create the heroes from the Hero custom post type and automatic custom fields.
-        // Add them to the heroes_remaining array.
-        while ( $loop->have_posts() ) {
-            $loop->the_post();
-            $power = get_field( 'stats' );
-            $name = the_title('', '', false);
-            foreach ( $contenders as $entry ) {
-                if ( $name == $entry ) {
-                    $hero = new Hero($name, $power);
-                    $tournament->add_hero($hero);
-                }
-            }
-        } 
+        foreach ($contenders as $contender) {
+            $name = $contender['name'];
+            $power = $contender['power'];
+
+            $hero = new Hero($name, $power);
+            $tournament->add_hero($hero);
+        }
         return $tournament;
     }    
     // End
-    
     function loadContenders() 
     {
-        $contenderData = array();
-        $selected = $_POST['selected'];
+        $contenders = array();
+        // $_POST['selected'] doesnt exist when called for the tournament.
+        if (isset($_POST['selected'])) {
+            $selected = $_POST['selected'];
+        }
+
         $heroes = array( 'post_type' => 'my_heroes' );
         $loop = new WP_Query( $heroes );
         while ( $loop->have_posts() ) {
@@ -80,8 +77,9 @@
             // $name will be the post title which is the same as the Hero's name.
             $name = the_title('', '', false);
             // If one of the Hero posts is one of the selected contenders, add the data
-            // to the contenderData array.
+            // to the contenders array.
             if ( in_array( $name, $selected )) {
+                $id = get_the_id();
                 $power = get_field( 'stats' );
                 $tagline = get_field( 'tagline' );
                 $description = get_field( 'description' );
@@ -94,16 +92,16 @@
                                     "thumbnail" => $image['sizes']['thumbnail'],
                                     );
 
-                $contenderData[$name] = $contender;
+                $contenders[$name] = $contender;
             }
         }
-        // Associative array of associative arrays..  ex: $contenderData[$name][$description]
-        return $contenderData;
+        $_SESSION['contenders'] = $contenders;
+        // Associative array of associative arrays..  ex: $contenders[$name]['description']
+        return $contenders;
     }
 
-    function displayContenders() 
+    function displayContenders($contenders) 
     {
-        $contenders = loadContenders();  
         // Wrapper for the contender previews
         echo "<div id='contender-wrapper'>".PHP_EOL;
         // Load the preview for each Hero entered as a contender.
@@ -145,17 +143,16 @@
             echo "</div>".PHP_EOL;      
         }
         echo "<div class='hero-description-fixed default-text'>PLACEHOLDER</div>".PHP_EOL;
-        return $contenders;
     }
 
 
-    if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['heroes']) ) {
-        // Need to pass the $contenders var to the tournament somehow.
-        $contenders = displayContenders();
+    if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['heroes']) && !isset($_POST['test']) ) {
+        $contenders = loadContenders();
+        displayContenders($contenders);
     }
     // Keeping for reference for now.
-    if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['test']) ) {
-        $contenders = $_POST['contenders'];
+    if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tournament_start']) ) {
+        $contenders = $_SESSION['contenders'];
         $tournament = set_tournament($contenders);
         $tournament->run_tournament();
         $tournament_winner = $tournament->get_tournament_winner()->name;
@@ -179,19 +176,17 @@
         }
         $rounds_html .= "</ul>".PHP_EOL;
         echo "<div class='round-content'>".PHP_EOL;
-        echo $contenders_html;
         echo $rounds_html;
         echo "...and the winner is... $tournament_winner!";
         echo "</div>".PHP_EOL;
     }   
     // End reference.
 ?>
-    <!-- Submit button once the contenders/heroes are set -->
+    <!-- Submit button to start tournament once the contenders/heroes are set -->
     <?php if ( isset($_POST['heroes']) ): ?>
     <div id="hero-fight-button">
-        <form method="POST" action="/wp/tournament/"><!-- $PATh var won't work here because PHP is weird I dont know -->
-            <input type="submit" name="test" value="FIGHT!">
-            <input type="hidden" name="contenders" value=<?php echo $contenders; ?>>
+        <form method="POST" action="/wp/tournament/"><!-- $PATH var won't work here because PHP is weird I dont know -->
+            <input type="submit" name="tournament_start" value="FIGHT!">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
         </form>
     </div>
     <?php endif; ?>   

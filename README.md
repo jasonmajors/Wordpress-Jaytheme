@@ -3,5 +3,5 @@ This is a simple Wordpress page built for educational purposes. I ended up doing
 
 Can be seen at:
 
-jasonmajors.net/tournament
+www.jasonmajors.net/tournament
 

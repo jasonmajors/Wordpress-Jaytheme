@@ -150,7 +150,7 @@
         $contenders = loadContenders();
         displayContenders($contenders);
     }
-    // Keeping for reference for now.
+    
     if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tournament_start']) ) {
         $contenders = $_SESSION['contenders'];
         $tournament = set_tournament($contenders);
